@@ -1,3 +1,7 @@
+
+ansible/group_vars/all.yml
+
+
 *.gem
 *.rbc
 /.config
