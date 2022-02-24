@@ -1,0 +1,5 @@
+#ansible hosts
+
+#172.31.41.107   aemdev
+aemdev
+rediswinui
