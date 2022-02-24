@@ -1,7 +1,0 @@
----
-ansible_connection:winrm
-ansible_user:Administrator
-ansible_password: "{{ vault_redis }}"
-ansible_winrm_server_cert_validation:ignore
-ansible_winrm_trasport:basic
-ansible_port:5986 #5985 (HTTP)
