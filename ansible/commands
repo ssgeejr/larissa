@@ -1,0 +1,2 @@
+ansible win -m win_ping
+ansible win -m win_ping --ask-vault-pass
