@@ -1,5 +1,5 @@
 
-ansible/group_vars/all.yml
+/ansible/vars/secrets.yml
 
 
 *.gem
