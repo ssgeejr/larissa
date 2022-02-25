@@ -1,0 +1,30 @@
+---
+- name: Create docker data directory
+  debug:
+     msg: "Roles working..."
+
+- name: Ping Windows Hosts
+  win_ping:
+
+
+- name: Check javac exists
+  win_stat:
+      path: C:\temp\javac.exe
+  register: javac_file
+
+- name: display result
+  debug:
+      msg: "File exists"
+  when: javac_file.stat.exists
+
+- name: Remove a file, if present
+  win_file:
+      path: C:\temp\javac.exe
+      state: absent     
+
+- name: Copy a single file, but keep a backup
+  win_copy:
+    src: /opt/apps/ansible/files/java/java.exe
+    dest: C:\Temp\java.exe
+    #    backup: yes
+

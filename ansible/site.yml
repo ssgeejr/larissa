@@ -17,3 +17,9 @@
      debug:
         msg: "File exists"
      when: javac_file.stat.exists
+
+
+   - name: Remove a file, if present
+     win_file:
+        path: C:\temp\javac.exe
+        state: absent
