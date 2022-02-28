@@ -1,0 +1,25 @@
+---
+- hosts: win
+  vars_files:
+   - vars/secrets.yml
+  gather_facts: false
+  tasks:
+   - name: Ping Windows Hosts
+     win_ping:
+
+
+   - name: Check javac exists
+     win_stat: 
+        path: C:\temp\javac.exe
+     register: javac_file
+
+   - name: display result
+     debug:
+        msg: "File exists"
+     when: javac_file.stat.exists
+
+
+   - name: Remove a file, if present
+     win_file:
+        path: C:\temp\javac.exe
+        state: absent
