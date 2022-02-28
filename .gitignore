@@ -1,3 +1,7 @@
+
+/ansible/vars/secrets.yml
+
+
 *.gem
 *.rbc
 /.config
