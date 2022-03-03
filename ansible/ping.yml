@@ -1,0 +1,8 @@
+---
+- hosts: win
+  vars_files:
+   - vars/secrets.yml
+  gather_facts: false
+  tasks:
+   - name: Ping Windows Hosts
+     win_ping:
