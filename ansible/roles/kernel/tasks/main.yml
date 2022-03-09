@@ -3,5 +3,7 @@
 - name: Get the kernerl version 
   shell: uname -srm
   register: kver
+  tags: os
 
 - debug: msg="{{ kver.stdout }}"
+
