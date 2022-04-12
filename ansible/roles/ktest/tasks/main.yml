@@ -1,0 +1,8 @@
+---
+# Find out what kernel version we are running
+- name: Get the kernerl version 
+  shell: uname -srm
+  register: kver
+  tags: test
+
+- debug: msg= "{{ kver.stdout }}"
