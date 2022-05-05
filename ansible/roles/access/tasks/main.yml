@@ -1,14 +1,12 @@
 ---
 - name: Make sure we have a 'sysops' group
-  remote_user: sysops
+  remote_user: devops
   become: yes
   group:
-    name: docker
-    state: present
     name: sysops
     state: present
 - name: Allow 'sysops' group to have passwordless sudo
-  remote_user: sysops
+  remote_user: devops
   become: yes
   lineinfile:
     dest: /etc/sudoers
@@ -28,7 +26,7 @@
   loop: "{{ usernames | subelements('sshkey', 'skip_missing=True') }}"
 
 - name: Add users ssh public key
-  remote_user: sysops
+  remote_user: devops
   become: yes
   authorized_key:
     user: "{{ item.0.user }}"
