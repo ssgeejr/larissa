@@ -1,36 +1,36 @@
 ---
-- name: Make sure we have a 'devops' group
-  remote_user: devops
+- name: Make sure we have a 'sysops' group
+  remote_user: sysops
   become: yes
   group:
     name: docker
     state: present
-    name: devops
+    name: sysops
     state: present
-- name: Allow 'devops' group to have passwordless sudo
-  remote_user: devops
+- name: Allow 'sysops' group to have passwordless sudo
+  remote_user: sysops
   become: yes
   lineinfile:
     dest: /etc/sudoers
     state: present
-    regexp: '^%devops'
-    line: '%devops ALL=(ALL) NOPASSWD: ALL'
+    regexp: '^%sysops'
+    line: '%sysops ALL=(ALL) NOPASSWD: ALL'
     validate: '/usr/sbin/visudo -cf %s'
 - name: Create user
-  remote_user: devops
+  remote_user: sysops
   become: yes
   user:
     name: "{{ item.0.user }}"
     shell: /bin/bash
     groups: 
        - docker
-       - devops
+       - sysops
        - wheel
     append: yes
   loop: "{{ usernames | subelements('sshkey', 'skip_missing=True') }}"
 
 - name: Add users ssh public key
-  remote_user: devops
+  remote_user: sysops
   become: yes
   authorized_key:
     user: "{{ item.0.user }}"
