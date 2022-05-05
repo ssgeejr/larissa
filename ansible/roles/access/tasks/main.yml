@@ -17,15 +17,13 @@
     line: '%sysops ALL=(ALL) NOPASSWD: ALL'
     validate: '/usr/sbin/visudo -cf %s'
 - name: Create user
-  remote_user: sysops
+  remote_user: devops
   become: yes
   user:
     name: "{{ item.0.user }}"
     shell: /bin/bash
     groups: 
-       - docker
        - sysops
-       - wheel
     append: yes
   loop: "{{ usernames | subelements('sshkey', 'skip_missing=True') }}"
 
