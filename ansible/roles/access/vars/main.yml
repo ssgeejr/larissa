@@ -1,0 +1,6 @@
+---
+usernames:
+  - user: mydevopsuesr
+    sshkey: 
+      - "ssh-rsa mydevopsuser pub key"
+
