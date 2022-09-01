@@ -2,8 +2,8 @@ version: '3'
 
 services:
   zmysql:
-    image: mysql:5.7
-    container_name: zabbix-mysql
+    image: mysql:8.0.30
+    container_name: zmysql
     ports:
       - '3306:3306'
     volumes:
