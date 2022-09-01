@@ -2,7 +2,7 @@ version: '3'
 
 services:
   zmysql:
-    image: mysql
+    image: mysql:5.7
     container_name: zabbix-mysql
     ports:
       - '3306:3306'
@@ -12,33 +12,25 @@ services:
       - MYSQL_ROOT_PASSWORD="password"
   zserver:
     image: zabbix/zabbix-server-mysql
-    container_name: zabbix-server
+    container_name: zserver
     ports:
       - '10051:10051'
     volumes:
       - /opt/apps/docker/mysql/data:/var/lib/mysql
     environment:
-      - DB_SERVER_HOST="zmysql"
-      - MYSQL_USER="password"
+      - DB_SERVER_HOST=zmysql
+      - MYSQL_USER="root"
       - MYSQL_ROOT_PASSWORD="password"
   zadmin:
     image: zabbix/zabbix-web-apache-mysql
-    container_name: zabbix-admin
+    container_name: zadmin
     ports:
       - '80:8080'
     volumes:
       - /opt/apps/docker/mysql/data:/var/lib/mysql
     environment:
-      - DB_SERVER_HOST="zmysql"
-      - MYSQL_USER="password"
+      - DB_SERVER_HOST=zmysql
+      - MYSQL_USER="root"
       - MYSQL_ROOT_PASSWORD="password"
       - PHP_TZ="America/Chicago"
-      - ZBX_SERVER_HOST="zserver"
-
-
-
-
-docker run --name zabbix-server-mysql -p 10051:10051 -e DB_SERVER_HOST="172.17.0.2" -e MYSQL_USER="root" -e MYSQL_PASSWORD="password" -d zabbix/zabbix-server-mysql
-
-
-docker run --name zabbix-web-apache-mysql -p 80:8080 -e DB_SERVER_HOST="172.17.0.2" -e MYSQL_USER="root" -e MYSQL_PASSWORD="password" -e ZBX_SERVER_HOST="172.17.0.3" -e PHP_TZ="Asia/Kolkata" -d zabbix/zabbix-web-apache-mysql
+      - ZBX_SERVER_HOST=zserver
